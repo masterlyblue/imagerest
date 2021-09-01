@@ -1,20 +1,65 @@
 export const styles = {
   uploadform_section: {
-    backgroundColor: '#fff',
+    backgroundColor: '#eee',
+    height: '100vh',
+    width: '100vw',
   },
   uploadform_container: {
-    height: '40rem',
-    border: '1px dashed #e0e0e0',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+  },
+  item_container: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '54rem',
+    height: '54rem',
+    // backgroundColor: 'blue',
+    border: '1px solid red',
+    borderRadius: '1rem',
+  },
+  item: {
+    display: 'flex',
+    // backgroundColor: 'green',
+    width: '48rem',
+    height: '48rem',
+    borderRadius: '2rem',
+  },
+  image_preview: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    borderRadius: '1rem',
+  },
+  image_field: {
+    display: 'flex',
+    flex: 5,
+    height: '100%',
+    width: '100%',
+    width: '26rem',
     borderRadius: '8px',
     backgroundColor: '#eee',
     position: 'relative',
-
-    '& > h2': {
+    
+    '& > div': {
       position: 'absolute',
       top: '50%',
       left: '50%',
-      transform: 'translate(-50%, -120%)',
+      transform: 'translate(-50%, -50%)',
       fontWeight: 700,
+      // backgroundColor: 'green',
+      width: '100%',
+      height: '100%',
+
+      '& > p': {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '90%',
+      }
     },
 
     '& > input': {
@@ -23,6 +68,7 @@ export const styles = {
       position: 'absolute',
       opacity: 0,
       cursor: 'pointer',
+      // backgroundColor: 'blue',
 
     },
     '&:hover': {
@@ -30,9 +76,31 @@ export const styles = {
       transition: '0.5s cubic-bezier(0.685, 0.0473, 0.346, 1)',
     },
   },
+  text_field: {
+    width: '50%',
+    display: 'flex',
+    flexDirection: 'column',
+    // backgroundColor: 'aqua',
+    justifyContent: 'space-between',
+    paddingLeft: '2%',
+    '& > h3': {
+      flex: 2,
+      fontSize: '2rem',
+    },
+    '& > p': {
+      flex: 6,
+    },
 
+    '& > div': {
+      display: 'flex',
+      '& h4': {
+        paddingLeft: '1rem',
+        margin: 0,
+      }
+    }
+  },
   uploadfrom_submitButton: {
-    width: '100%',
+    width: '50%',
     height: '4rem',
     marginTop: '1rem',
     border: 'none',
