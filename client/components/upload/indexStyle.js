@@ -1,8 +1,8 @@
 export const styles = {
   uploadform_section: {
     backgroundColor: '#eee',
-    height: '100vh',
     width: '100vw',
+    
   },
   uploadform_container: {
     display: 'flex',
@@ -10,6 +10,7 @@ export const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
+    marginTop: '7rem',
   },
   item_container: {
     display: 'flex',
@@ -50,7 +51,7 @@ export const styles = {
       left: '50%',
       transform: 'translate(-50%, -50%)',
       fontWeight: 700,
-      // backgroundColor: 'green',
+      backgroundColor: '#e0e0e0',
       width: '100%',
       height: '100%',
 
@@ -72,7 +73,7 @@ export const styles = {
 
     },
     '&:hover': {
-      backgroundColor: '#e0e0e0',
+      backgroundColor: '#e00000',
       transition: '0.5s cubic-bezier(0.685, 0.0473, 0.346, 1)',
     },
   },

@@ -1,8 +1,7 @@
 import { HYDRATE } from "next-redux-wrapper";
 import { combineReducers } from "@reduxjs/toolkit";
 
-// import { reducer as user_reducer, name as user_name} from './userSlice';
-import { reducer as counter_reducer, name as counter_name } from './counterSlice'
+import { reducer as user_reducer, name as user_name } from './userSlice'
 
 export const rootReducer = (state = {}, action) => {
   if (action.type === HYDRATE) {
@@ -14,7 +13,7 @@ export const rootReducer = (state = {}, action) => {
   }
 
   return combineReducers({
-    [counter_name]: counter_reducer,
+    [user_name]: user_reducer,
 
   })(state, action);
 }

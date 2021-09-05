@@ -1,14 +1,15 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
 
-export const name = 'COUNT';
+export const name = 'USER_ENV';
 
 const initialState = {
-  value: 0,
+  userLocation: '',
 }
 
 const reducers = {
-  increment: state => state.value + 1,
-  decrement: state => state.value - 1,
+  setLoc: (state, { payload }) => {
+    state.userLocation = payload;
+  }
 }
 
 const slice = createSlice({
@@ -18,14 +19,15 @@ const slice = createSlice({
 })
 
 const selectAllState = createSelector(
-  state => state.value,
+  state => state.userLocation,
 
-  (value) => {
-    return { value };
+  (userLocation) => {
+    return { userLocation };
   }
-).actions
+)
+
 export const selector = {
-  all: state => selectAllState(state)
+  all: state => selectAllState(state[name])
 }
 
 export const reducer = slice.reducer;
