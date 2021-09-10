@@ -35,30 +35,34 @@ export const styles = {
     },
     '& > div:nth-child(3)': {
       display: 'flex',
-      '& > button': {
-        marginLeft: '1rem',
-        border: 'none',
-        backgroundColor: '#fff',
-        width: '8rem',
-        fontSize: '1.6rem',
-        fontWeight: 700,
-        cursor: 'pointer',
-        '&:hover': {
-          color: '#424242'
-        }
-      },
-      '& > button:nth-child(1)': {
-        backgroundColor: 'red',
-        color: '#fff',
-        borderRadius: '10rem',
-        height: '4rem',
-      },
-      '& > button:nth-child(2)': {
-        backgroundColor: '#eee',
-        color: '#9e9e9e',
-        borderRadius: '10rem',
-        height: '4rem',
-      },
     },
   },
+  idleButton: {
+    marginLeft: '1rem',
+    border: 'none',
+    backgroundColor: '#fff',
+    width: '8rem',
+    fontSize: '1.6rem',
+    fontWeight: 700,
+    cursor: 'pointer',
+    color: '#9e9e9e',
+    '&:hover': {
+      color: '#424242'
+    }
+  },
+  activeButton: {
+    marginLeft: '1rem',
+    border: 'none',
+    backgroundColor: 'red',
+    borderRadius: '10rem',
+    color: '#fff',
+    height: '4rem',
+    width: '8rem',
+    fontSize: '1.6rem',
+    fontWeight: 700,
+    cursor: 'pointer',
+    '&:hover': {
+      color: '#424242'
+    }
+  }
 }

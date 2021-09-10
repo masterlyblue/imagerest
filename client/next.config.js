@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  reactStrictMode: true,
+  reactStrictMode: false,
 
   // 절대 경로
   webpack(config, options) {

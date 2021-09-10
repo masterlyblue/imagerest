@@ -26,7 +26,7 @@ userRouter.post('/register', async (req, res) => {
 
     res.json({ message: 'user regitser', sessionId: session._id, name: user.name })
   } catch (e) {
-    console.log(e)
+    console.warn(e.message)
     res.status(400).json({ message: e.message })
   }
 })
@@ -34,7 +34,7 @@ userRouter.post('/register', async (req, res) => {
 // 로그인
 userRouter.patch('/login', async (req, res) => {
   try {
-    const user = await User.findOne({ username: req.body.username });
+    const user = await User.findOne({ username: req.body.name });
     const isValid = await compare(req.body.password, user.hashedPassword); // 비밀번호 조회
 
     if (!isValid) throw new Error('입력하신 정보가 올바르지 않습니다.');
@@ -46,7 +46,7 @@ userRouter.patch('/login', async (req, res) => {
     res.json({
       message: 'user validated',
       sessionId: session._id,
-      name: user.username
+      name: user.name
     })
   } catch (e) {
     console.log(e)
@@ -57,7 +57,7 @@ userRouter.patch('/login', async (req, res) => {
 // 로그아웃
 userRouter.patch('/logout', async (req, res) => {
   try {
-    console.log(req.user);
+    console.log('req:',req.headers.sessionid);
     if (!req.user) throw new Error('invalid sessionid')
 
     await User.updateOne(

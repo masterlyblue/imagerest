@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux';
 import { action as userAction } from 'store/modules/userSlice';
 // 기타
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const RegisterPage = () => {
   const classes = useStyles();
@@ -19,10 +21,10 @@ const RegisterPage = () => {
   })
   const [passwordError, setPasswordError] = useState(false);
 
-  const render_input_item = (item) => {
+  const render_input_item = (item, index) => {
     const { name, type, placeholder } = item;
     return (
-      <div className={classes.render_input_item}>
+      <div className={classes.render_input_item} key={'1'+index}>
         <input name={name} type={type} placeholder={placeholder} onChange={onChangeText} />
         {type === 'password' && passwordError && <div><CustomColorIcon /></div>}
       </div>
@@ -33,15 +35,27 @@ const RegisterPage = () => {
     setRegisterData({ ...registerData, [e.target.name]: e.target.value })
   }
 
-  const onSubmit = () => {
-
-    // 패스워드 체크
-    if (registerData.userPassword !== registerData.userPasswordCheck) {
-      setPasswordError(true);
-      return;
+  const onSubmit = async () => {
+    try {
+      // 패스워드 체크
+      if (registerData.userPassword !== registerData.userPasswordCheck) {
+        setPasswordError(true);
+        return;
+      }
+      setPasswordError(false);
+      const result = await axios.post('http://localhost:5000/users/register', {
+        name: registerData.userId,
+        username: registerData.userName,
+        password: registerData.userPassword
+      })
+      toast.success('회원가입 성공')
+      const { setLoc, setId } = userAction;
+      dispatch(setId(result.data.sessionId))
+      dispatch(setLoc('imagelist'))
+    } catch (e) {
+      console.warn(e);
+      toast.error(e.message);
     }
-    setPasswordError(false);
-    console.log(passwordError)
   }
 
   const onMoveLoginPage = () => {

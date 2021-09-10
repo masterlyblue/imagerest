@@ -5,25 +5,21 @@ const useStyles = makeStyles(styles);
 // 리덕스
 import { useDispatch, useSelector } from 'react-redux';
 import { action as userAction, selector as userSelector } from 'store/modules/userSlice';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 // 컴포넌트
 // 라이브러리
 // 기타
 
-const UploadForm = () => {
+const Header = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { userLocation } = useSelector(userSelector.all);
+  const { userLocation, sessionId } = useSelector(userSelector.all);
   const [scroll, setScroll] = useState(false);
-  const isLoggedIn = false;
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const onhandleScroll = () => {
-    const scrollPosition = window.scrollY;
-    if (scroll > 80) {
-      setScroll(true);
-    } else {
-      setScroll(false);
-    }
-    return;
+    setScroll(scroll > 80);
   }
 
   useEffect(() => {
@@ -36,17 +32,33 @@ const UploadForm = () => {
     dispatch(setLoc(e.target.value));
   }
 
+  const onClickLogout = async () => {
+    console.log(isLoggedIn)
+    try {
+      await axios.patch('http://localhost:5000/users/logout', {}, {
+        headers: { sessionid: sessionId }
+      })
+      sessionStorage.removeItem('userId')
+      sessionStorage.removeItem('sessionId')
+      setIsLoggedIn(false);
+      setUserId('');
+      toast.success('로그아웃')
+    } catch (e) {
+      toast.error(e.message)
+    }
+  }
+
   const renderUserLocation = () => {
     switch (userLocation) {
       case 'register':
-        return <button value='login'>로그인</button>
+        return <button className={classes.idleButton} value='login'>로그인</button>
       case 'login':
-        return <button value='register'>회원가입</button>
+        return <button className={classes.idleButton} value='register'>회원가입</button>
       default:
         return (
           <>
-            <button value='login'>로그인</button>
-            <button value='register'>회원가입</button>
+            <button className={classes.idleButton} value='login'>로그인</button>
+            <button className={classes.idleButton} value='register'>회원가입</button>
           </>
         )
     }
@@ -67,15 +79,15 @@ const UploadForm = () => {
           {/* 검색창 */}
           <input></input>
         </div>
-        
+
         <div>
           {/* 네비게이션 */}
-          {isLoggedIn && <div>프로필</div>}
-          {renderUserLocation()}
+          {isLoggedIn && <button value='imagelist' className={classes.activeButton} onClick={onClickLogout}>{userId}로그아웃</button>}
+          {!isLoggedIn && renderUserLocation()}
         </div>
       </div>
     </div>
   )
 }
 
-export default UploadForm;
+export default Header;

@@ -4,11 +4,15 @@ export const name = 'USER_ENV';
 
 const initialState = {
   userLocation: '',
+  sessionId: '',
 }
 
 const reducers = {
   setLoc: (state, { payload }) => {
     state.userLocation = payload;
+  },
+  setId: (state, { payload }) => {
+    state.sessionId = payload;
   }
 }
 
@@ -20,9 +24,10 @@ const slice = createSlice({
 
 const selectAllState = createSelector(
   state => state.userLocation,
+  state => state.sessionId,
 
-  (userLocation) => {
-    return { userLocation };
+  ( userLocation, sessionId ) => {
+    return { userLocation, sessionId };
   }
 )
 

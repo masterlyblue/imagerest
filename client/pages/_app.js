@@ -15,9 +15,10 @@ function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    const { setLoc } = userAction;
+    const { setLoc, setId } = userAction;
     dispatch(setLoc('imagelist'));
-
+    dispatch(setId(sessionStorage.getItem('sessionId') | null ))
+    
     const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
